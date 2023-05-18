@@ -10,3 +10,10 @@
 
 ![](Certificados/Git-GitHub.png)
 </details>
+
+<details>
+<summary><strong style="font-size: 20px;">Certificado Terminal y Lineas de Comando</strong></summary>
+
+![](Certificados/Terminal.png)
+</details>
+
