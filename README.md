@@ -1,4 +1,4 @@
-# Formacion-Practicante
+# Formacion-Practicante <a href="mailto:florezj328@gmail.com"> <img src="https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white" width="80px" alt="Jhonattan Florez"/> </a>
 <details>
 <summary><strong style="font-size: 20px;">Certificado Introducción</strong></summary>
 
