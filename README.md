@@ -17,3 +17,9 @@
 ![](Certificados/Terminal.png)
 </details>
 
+
+<details>
+<summary><strong style="font-size: 20px;">Certificado Programación Básica </strong></summary>
+
+
+</details>

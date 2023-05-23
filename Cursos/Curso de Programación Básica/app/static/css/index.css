@@ -43,7 +43,7 @@ body {
 
 .tarjeta-de-mokepon img {
   width: 80px;
-}
+} 
 
 #boton-mascota {
   width: 180px;
@@ -113,6 +113,16 @@ input:checked + label {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#ver-mapa{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#mapa{
+  border: 2px solid white;
 }
 
 @media (max-width: 360px) {
