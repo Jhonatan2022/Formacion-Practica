@@ -1,7 +1,9 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
         <title>MOKEPON!</title>
+
         <link rel="stylesheet" href="../static/css/index.css"> 
         <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
     </head>
@@ -16,14 +18,20 @@
             <button id="boton-mascota">Seleccionar</button>
         </section>
 
+
+
         <section id="ver-mapa">
-            <h1 class="titulo"> Recorre el mapa con tu mokepon</h1>
+            <h2 class="subtitulo"> Recorre el mapa con tu mokepon</h2>
             <canvas id="mapa"></canvas>
             <button onmouseup="detenerMovimiento()" onmousedown="moverArriba()" ><i class="fas fa-arrow-up"></i></button>
-            <button onmouseup="detenerMovimiento()" onmousedown="moverIzquierda()" ><i class="fas fa-arrow-left"></i></button>
-            <button onmouseup="detenerMovimiento()" onmousedown="moverAbajo()" ><i class="fas fa-arrow-down"></i></button>
-            <button onmouseup="detenerMovimiento()" onmousedown="moverDerecha()" ><i class="fas fa-arrow-right"></i></button>
+            <div>
+                <button onmouseup="detenerMovimiento()" onmousedown="moverIzquierda()" ><i class="fas fa-arrow-left"></i></button>
+                <button onmouseup="detenerMovimiento()" onmousedown="moverAbajo()" ><i class="fas fa-arrow-down"></i></button>
+                <button onmouseup="detenerMovimiento()" onmousedown="moverDerecha()" ><i class="fas fa-arrow-right"></i></button>
+            </div>
         </section>
+
+
 
         <section id="seleccionar-ataque">
             <h1 class="titulo">Mokepon</h1>
