@@ -117,59 +117,50 @@ let capipepo = new Mokepon('Capipepo', '../assets/capipepo_attack.png', 5, '../a
 let hipodoge = new Mokepon('Hipodoge', '../assets/hipodoge_attack.png', 5, '../assets/hipodoge.png')
 let ratigueya = new Mokepon('Ratigueya', '../assets/ratigueya_attack.png', 5, '../assets/ratigueya.png')
 
-// Mokepones Enemigos
-let capipepoEnemigo = new Mokepon('Capipepo', '../assets/capipepo_attack.png', 5, '../assets/capipepo.png')
-let hipodogeEnemigo = new Mokepon('Hipodoge', '../assets/hipodoge_attack.png', 5, '../assets/hipodoge.png')
-let ratigueyaEnemigo = new Mokepon('Ratigueya', '../assets/ratigueya_attack.png', 5, '../assets/ratigueya.png')
 
 
+const hipodoge_Ataques = [
+    { nombre: '💧', id: 'boton-agua'},
+    { nombre: '💧', id: 'boton-agua'},
+    { nombre: '💧', id: 'boton-agua'},
+    { nombre: '🔥', id: 'boton-fuego'},
+    { nombre: '🌱', id: 'boton-tierra'}
+]
+
+
+const capipepo_Ataques = [
+    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: '🌱', id: 'boton-tierra'},
+    { nombre: '💧', id: 'boton-agua'},
+    { nombre: '🔥', id: 'boton-fuego'}
+]
+
+
+const ratigueya_Ataques = [
+    { nombre: '🔥', id: 'boton-fuego'},
+    { nombre: '🔥', id: 'boton-fuego'},
+    { nombre: '🔥', id: 'boton-fuego'}, 
+    { nombre: '💧', id: 'boton-agua'},
+    { nombre: '🌱', id: 'boton-tierra'}
+]
 
 // Usamos el metodo push para agregar los mokepones al array
 //mokepones.push(hipodoge, capipepo, ratigueya)
-hipodoge.ataques.push(
-    { nombre: '💧', id: 'boton-agua'},
-    { nombre: '💧', id: 'boton-agua'},
-    { nombre: '💧', id: 'boton-agua'},
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🌱', id: 'boton-tierra'}
-)
-hipodogeEnemigo.ataques.push(
-    { nombre: '💧', id: 'boton-agua'},
-    { nombre: '💧', id: 'boton-agua'},
-    { nombre: '💧', id: 'boton-agua'},
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🌱', id: 'boton-tierra'}
-)
+hipodoge.ataques.push(...hipodoge_Ataques)
+hipodogeEnemigo.ataques.push(...hipodoge_Ataques)
 
-capipepo.ataques.push(
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '💧', id: 'boton-agua'},
-    { nombre: '🔥', id: 'boton-fuego'}
-)
-capipepoEnemigo.ataques.push(
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '🌱', id: 'boton-tierra'},
-    { nombre: '💧', id: 'boton-agua'},
-    { nombre: '🔥', id: 'boton-fuego'}
-)
 
-ratigueya.ataques.push(
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🔥', id: 'boton-fuego'}, 
-    { nombre: '💧', id: 'boton-agua'},
-    { nombre: '🌱', id: 'boton-tierra'}
-)
-ratigueyaEnemigo.ataques.push(
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🔥', id: 'boton-fuego'},
-    { nombre: '🔥', id: 'boton-fuego'}, 
-    { nombre: '💧', id: 'boton-agua'},
-    { nombre: '🌱', id: 'boton-tierra'}
-)
+capipepo.ataques.push(...capipepo_Ataques)
+capipepoEnemigo.ataques.push(...capipepo_Ataques)
+
+
+
+ratigueya.ataques.push(...ratigueya_Ataques)
+ratigueyaEnemigo.ataques.push(...ratigueya_Ataques)
+
+
+
 mokepones.push(hipodoge, capipepo, ratigueya)
 
 
@@ -468,6 +459,11 @@ function pintarCanvas(){
         mapa.height // Alto de la imagen
     )
     mascotaDeJugadorObjeto.pintarMokepon()
+
+
+    envairPosicion(mascotaDeJugadorObjeto.x, mascotaDeJugadorObjeto.y)
+
+
     capipepoEnemigo.pintarMokepon()
     hipodogeEnemigo.pintarMokepon()
     ratigueyaEnemigo.pintarMokepon()
@@ -477,6 +473,42 @@ function pintarCanvas(){
         revisarColision(hipodogeEnemigo)
         revisarColision(ratigueyaEnemigo)
     }
+}
+
+
+
+function envairPosicion(x, y){
+    fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`, {
+        method: "post",
+        headers:{
+            // Indicamos que el contenido es de tipo JSON
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            x,
+            y
+        })
+    })
+    .then(function (res){
+        if (res.ok){
+            res.json()
+                .then(function ({ enemigos }){
+                    console.log(enemigos)
+                    let mokeponEnemigo = null
+
+                    enemigos.forEach((enemigo) => {
+                        const mokeponNombre = enemigo.mokepon.nombre || ""
+                        if (mokeponNombre === 'Capipepo') {
+                            let capipepoEnemigo = new Mokepon('Capipepo', '../assets/capipepo_attack.png', 5, '../assets/capipepo.png')
+                        } else if (mokeponNombre === 'Hipodoge') {
+                            let hipodogeEnemigo = new Mokepon('Hipodoge', '../assets/hipodoge_attack.png', 5, '../assets/hipodoge.png')
+                        } else if (mokeponNombre === 'Ratigueya') {
+                            let ratigueyaEnemigo = new Mokepon('Ratigueya', '../assets/ratigueya_attack.png', 5, '../assets/ratigueya.png')
+                        }
+                    })                    
+                })
+        }
+    })
 }
 
 
