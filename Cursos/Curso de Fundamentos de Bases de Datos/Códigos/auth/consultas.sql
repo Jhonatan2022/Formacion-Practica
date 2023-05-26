@@ -263,3 +263,20 @@ FROM
 GROUP BY estatus , Mes_De_Publicacion
 HAVING COUNT(*) >= 3
 ORDER BY COUNT(*) ASC; 
+
+
+
+
+------------------------------------------
+-- Querys anidados - Subconsultas - Consultas anidadas
+SELECT 
+    new_table_projection.date, COUNT(*) AS posts_count
+FROM
+    (SELECT 
+        DATE(MIN(fecha_publicacion)) AS DATE,
+            YEAR(fecha_publicacion) AS post_year
+    FROM
+        posts
+    GROUP BY post_year) AS new_table_projection
+GROUP BY new_table_projection.date
+ORDER BY new_table_projection.date;
