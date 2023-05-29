@@ -23,3 +23,10 @@
 
 [![](Certificados/Programación%20Básica.png)](https://drive.google.com/file/d/1nZJjJm70QA2vQrLC0de1D9TZb2gc5Jju/view?usp=drive_link)
 </details>
+
+
+<details>
+<summary><strong style="font-size: 20px;">Certificado Fundamentos de Bases de Datos </strong></summary>
+
+[![](Certificados/Bases%20De%20Datos.png)](https://drive.google.com/file/d/1Gpvv7s0G_hxzTHTDGWTjl3jsWB8ozUHk/view?usp=drive_link)
+</details>

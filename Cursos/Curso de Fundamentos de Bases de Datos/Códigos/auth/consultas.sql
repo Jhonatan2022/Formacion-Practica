@@ -269,6 +269,10 @@ ORDER BY COUNT(*) ASC;
 
 ------------------------------------------
 -- Querys anidados - Subconsultas - Consultas anidadas
+-- Creamos una tabla temporal con los años de publicación
+-- Contamos los posts por año
+-- Obtenemos solos los valores minimos de los años
+-- agrupamos y ordenamos por la fecha de publicación
 SELECT 
     new_table_projection.date, COUNT(*) AS posts_count
 FROM
@@ -280,3 +284,124 @@ FROM
     GROUP BY post_year) AS new_table_projection
 GROUP BY new_table_projection.date
 ORDER BY new_table_projection.date;
+
+
+
+
+
+
+------------------------------------------
+-- Querys anidados - Subconsultas - WHERE
+SELECT 
+    *
+FROM
+    platziblog.posts
+WHERE
+    fecha_publicacion = (SELECT 
+            MAX(fecha_publicacion)
+        FROM
+            platziblog. posts);
+
+
+
+
+
+
+------------------------------------------
+-- Transformando preguntas en consultas
+SELECT 
+    posts.titulo, COUNT(*) AS num_etiquetas
+FROM
+    platziblog.posts
+        INNER JOIN
+    post_etiquetas ON posts.id = post_etiquetas.post_id
+        INNER JOIN
+    etiquetas ON etiquetas.id = post_etiquetas.etiqueta_id
+GROUP BY posts.id
+ORDER BY num_etiquetas ASC;
+
+
+
+
+
+------------------------------------------
+-- Mostramos las etiquetas que tiene el posts 
+SELECT 
+    posts.titulo, GROUP_CONCAT(nombre_etiqueta)
+FROM
+    posts
+        INNER JOIN
+    post_etiquetas ON posts.id = post_etiquetas.post_id
+        INNER JOIN
+    etiquetas ON etiquetas.id = post_etiquetas.etiqueta_id
+GROUP BY posts.id;
+
+
+
+
+------------------------------------------
+-- Traemos las etiquetas que no estan asociadas a un post
+SELECT 
+    *
+FROM
+    etiquetas
+        LEFT JOIN
+    post_etiquetas ON etiquetas.id = post_etiquetas.etiqueta_id
+WHERE
+    post_etiquetas.etiqueta_id IS NULL;
+
+
+
+
+
+------------------------------------------
+-- Listamos cuantas veces se han usado las categorias
+SELECT 
+    C.nombre_categoria, COUNT(*) AS cantidad
+FROM
+    categorias AS c
+        INNER JOIN
+    posts AS p ON c.id = p.categoria_id
+GROUP BY c.id
+ORDER BY cantidad DESC
+LIMIT 1;
+
+
+
+
+
+------------------------------------------
+-- Consultamos la cantidad de post de cada usuario y sus categorias
+SELECT 
+    u.nickname,
+    COUNT(*) AS cant_post,
+    GROUP_CONCAT(nombre_categoria)
+FROM
+    usuarios AS u
+        INNER JOIN
+    posts AS p ON u.id = p.usuario_id
+        INNER JOIN
+    categorias AS c ON c.id = p.categoria_id
+GROUP BY u.id
+ORDER BY cant_post DESC;
+
+
+
+
+
+------------------------------------------
+-- Traemos los usuarios que no tienen posts
+SELECT 
+    *
+FROM
+    usuarios AS u
+        LEFT JOIN
+    posts AS p ON u.id = p.usuario_id
+WHERE
+    p.usuario_id IS NULL; 
+
+
+
+
+
+------------------------------------------
