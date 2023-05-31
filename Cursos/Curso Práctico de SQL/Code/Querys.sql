@@ -514,3 +514,50 @@ WITH ORDINALITY;
 SELECT EMAIL
     FROM PLATZI.ALUMNOS
     WHERE EMAIL ~ '^[a-z0-9._%+-]+@google[a-z0-9.-]+\.[a-z]{2,4}$';
+---------------------------------------------
+
+
+
+
+
+-- Promedio de colegiatura por carrera usando window functions
+SELECT *, 
+        AVG(COLEGIATURA) OVER(PARTITION BY CARRERA_ID) AS PROMEDIO
+    FROM PLATZI.ALUMNOS
+	ORDER BY PROMEDIO ASC;
+-- Sumamos las colegiaturas
+SELECT *,
+        SUM(COLEGIATURA) OVER(PARTITION BY CARRERA_ID
+ORDER BY  COLEGIATURA)
+    FROM PLATZI.ALUMNOS;
+-- Traemos el top de colegiaturas
+SELECT *
+    FROM 
+    (SELECT *,
+        RANK()
+        OVER (PARTITION BY CARRERA_ID
+    ORDER BY  COLEGIATURA DESC) AS BRAND_RANK
+        FROM PLATZI.ALUMNOS) AS TOP_COLEGIATURA
+    WHERE BRAND_RANK < 3
+ORDER BY  BRAND_RANK;
+---------------------------------------------
+
+
+
+
+
+
+
+-- ROW_NUMBER(): nos da el numero de la tupla que estamos utilizando en ese momento.
+-- OVER([PARTITION BY column] [ORDER BY column DIR]): nos deja Particionar y Ordenar la window function.
+-- PARTITION BY(column/s): es un group by para la window function, se coloca dentro de OVER.
+-- FIRST_VALUE(column): devuelve el primer valor de una serie de datos.
+-- LAST_VALUE(column): Devuelve el ultimo valor de una serie de datos.
+-- NTH_VALUE(column, row_number): Recibe la columna y el numero de row que queremos devolver de una serie de datos
+-- RANK(): nos dice el lugar que ocupa de acuerdo a el orden de cada tupla, deja gaps entre los valores.
+-- DENSE_RANK(): Es un rango mas denso que trata de eliminar los gaps que nos deja RANK.
+-- PERCENT_RANK(): Categoriza de acuerdo a lugar que ocupa igual que los anteriores pero por porcentajes.
+
+SELECT *, DENSE_RANK() OVER(PARTITION BY CARRERA_ID ORDER BY COLEGIATURA DESC) AS RANK
+FROM PLATZI.ALUMNOS
+ORDER BY CARRERA_ID, RANK;
