@@ -318,5 +318,199 @@ SELECT ISEMPTY(INT4RANGE(10, 20));
 -- Mostramos el tutor_id por medio de rango
 SELECT * 
 FROM PLATZI.ALUMNOS
-WHERE INT4RANGE(1, 2) @> TUTOR_ID;
+WHERE INT4RANGE(1, 4) @> TUTOR_ID;
+-- Minimo y maximo de tutor_id y carrera_id
+SELECT NUMRANGE( 
+    (SELECT MIN(TUTOR_ID)
+        FROM PLATZI.ALUMNOS), 
+        (SELECT MAX(TUTOR_ID)
+            FROM PLATZI.ALUMNOS) ) * NUMRANGE( 
+            (SELECT MIN(CARRERA_ID)
+                FROM PLATZI.ALUMNOS), 
+                (SELECT MAX(CARRERA_ID)
+                    FROM PLATZI.ALUMNOS) );
 ---------------------------------------------
+
+
+
+
+-- Consulta con min y max
+SELECT CARRERA_ID,
+        MAX(FECHA_INCORPORACION)
+    FROM PLATZI.ALUMNOS
+    GROUP BY  CARRERA_ID
+ORDER BY  CARRERA_ID;
+-- Otra solución
+SELECT TUTOR_ID,
+        MIN(NOMBRE)
+    FROM PLATZI.ALUMNOS
+    GROUP BY  TUTOR_ID
+ORDER BY  TUTOR_ID ;
+---------------------------------------------
+
+
+
+
+
+-- Consulta con SELFISH JOIN (Nos sirve para hacer una consulta a la misma tabla)
+SELECT CONCAT(A.NOMBRE, " ", A.APELLIDO) AS ALUMNO,
+        CONCAT(T.NOMBRE, " ", T.APELLIDO) AS TUTOR
+    FROM PLATZI.ALUMNOS AS A
+INNER JOIN PLATZI.ALUMNOS AS T
+    ON A.TUTOR_ID = T.ID
+    WHERE A.TUTOR_ID IS NOT NULL;
+-- Consultamos cual tutor tiene mas alumnos 
+SELECT CONCAT(T.NOMBRE,
+        " " ,
+        T.APELLIDO) AS TUTOR,
+        COUNT(*) AS "Total de alumnos"
+    FROM PLATZI.ALUMNOS AS A
+INNER JOIN PLATZI.ALUMNOS AS T
+    ON A.TUTOR_ID = T.ID
+    GROUP BY  TUTOR
+ORDER BY  "Total de alumnos" DESC LIMIT 3;
+---------------------------------------------
+
+
+
+
+
+
+-- Consulta con avg (nos sirve para sacar el promedio)
+SELECT AVG ("Total de alumnos") AS PROMEDIO
+    FROM 
+    (SELECT CONCAT(T.NOMBRE,
+        " ",
+        T.APELLIDO) AS TUTOR,
+        COUNT(*) AS "Total de alumnos"
+        FROM PLATZI.ALUMNOS AS A
+    INNER JOIN PLATZI.ALUMNOS AS T
+        ON A.TUTOR_ID = T.ID
+        GROUP BY  TUTOR) AS prmedio_de_alumnos ;
+
+---------------------------------------------
+
+
+
+
+
+
+-- Consulta con FULL OUTER JOIN (nos sirve para traer todos los registros de ambas tablas)
+SELECT CONCAT(A.NOMBRE,
+        " ",
+        A.APELLIDO),
+        A.CARRERA_ID,
+        C.ID,
+        C.CARRERA
+    FROM PLATZI.ALUMNOS AS A FULL OUTER
+JOIN PLATZI.CARRERAS AS C
+    ON A.CARRERA_ID = C.ID
+ORDER BY  A.CARRERA_ID;
+-- Traemos los alumnos que no tienen una carrera asignada
+SELECT CONCAT(A.NOMBRE,
+        " ",
+        A.APELLIDO),
+        A.CARRERA_ID,
+        C.ID,
+        C.CARRERA
+    FROM PLATZI.ALUMNOS AS A
+LEFT JOIN PLATZI.CARRERAS AS C
+    ON A.CARRERA_ID = C.ID
+    WHERE C.ID IS NULL
+ORDER BY  A.CARRERA_ID;
+-- Traemos las carreras que no tienen alumnos
+SELECT CONCAT(A.NOMBRE,
+        " ",
+        A.APELLIDO),
+        A.CARRERA_ID,
+        C.ID,
+        C.CARRERA
+    FROM PLATZI.ALUMNOS AS A
+RIGHT JOIN PLATZI.CARRERAS AS C
+    ON A.CARRERA_ID = C.ID
+    WHERE A.ID IS NULL
+ORDER BY  C.ID DESC ;
+-- Traemos solo los datos que coinciden en ambas tablas
+SELECT CONCAT(A.NOMBRE,
+        " ",
+        A.APELLIDO),
+        A.CARRERA_ID,
+        C.ID,
+        C.CARRERA
+    FROM PLATZI.ALUMNOS AS A
+INNER JOIN PLATZI.CARRERAS AS C
+    ON A.CARRERA_ID = C.ID
+ORDER BY  C.ID DESC ;
+-- Traemos los datos que no coinciden en ambas tablas
+SELECT CONCAT(A.NOMBRE,
+        " " ,
+        A.APELLIDO) AS NOMBRE_COMPLETO,
+        A.CARRERA_ID,
+        C.ID,
+        C.CARRERA
+    FROM PLATZI.ALUMNOS AS A FULL OUTER
+JOIN PLATZI.CARRERAS AS C
+    ON A.CARRERA_ID = C.ID
+    WHERE A.ID IS NULL
+        OR C.ID IS NULL
+ORDER BY  A.CARRERA_ID DESC, C.ID DESC;
+---------------------------------------------
+
+
+
+
+
+-- Consulta usando lpad (nos sirve para rellenar con ceros a la izquierda)
+-- Consulta usando rpad (nos sirve para rellenar con ceros a la derecha)
+SELECT LPAD('HOLA', '12', 'P');
+-- Triangulo
+SELECT LPAD("^", ID, "^")
+    FROM PLATZI.ALUMNOS
+    WHERE ID < 10;
+-- Otra solución
+SELECT LPAD("^",
+        CAST(ROW_ID AS INT),
+        "^")
+    FROM 
+    (SELECT ROW_NUMBER() OVER(ORDER BY CARRERA_ID) AS ROW_ID,
+        *
+        FROM PLATZI.ALUMNOS ) AS ALUMNOS_ID
+    WHERE ROW_ID <= 5
+ORDER BY  CARRERA_ID;
+---------------------------------------------
+
+
+
+
+
+-- Consulta usando GENERATE_SERIES (nos sirve para generar series de numeros)
+SELECT * FROM GENERATE_SERIES(1.2, 7, 1.1)
+-- De forma practica
+SELECT A.ID,
+        A.NOMBRE,
+        A.APELLIDO,
+        A.CARRERA_ID,
+        S.A
+    FROM PLATZI.ALUMNOS AS A
+INNER JOIN GENERATE_SERIES(0, 10) AS S(A)
+    ON S.A = A.CARRERA_ID
+ORDER BY  A.CARRERA_ID;
+-- Triangulo generado por medio de GENERATE_SERIES
+-- ORDINALITY (son los numeros que se generan por medio de GENERATE_SERIES)) 
+SELECT LPAD("^",
+        CAST(ORDINALITY AS INT),
+        "^")
+    FROM GENERATE_SERIES(10, 2, -2)
+WITH ORDINALITY;
+---------------------------------------------
+
+
+
+
+
+-- Consultas con expresiones regulares (nos sirve para buscar patrones en los datos)
+-- ~ (nos sirve para buscar patrones en los datos)
+-- '^[a-z0-9._%+-]+@google[a-z0-9.-]+\.[a-z]{2,4}$' (patron para buscar correos de google)
+SELECT EMAIL
+    FROM PLATZI.ALUMNOS
+    WHERE EMAIL ~ '^[a-z0-9._%+-]+@google[a-z0-9.-]+\.[a-z]{2,4}$';
