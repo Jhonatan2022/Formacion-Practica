@@ -1,0 +1,42 @@
+use("platzi_store")
+
+
+// db.iot.insertOne(
+//     {
+//         sensor: "A001",
+//         date: "2020-01-01",
+//         reading: [123]
+//     }
+// )
+
+
+
+// pop nos permite eliminar el primer o el último elemento de un arreglo
+// db.iot.updateOne(
+//     {
+//         sensor: "A001",
+//         date: "2020-01-01"
+//     },
+//     {
+//         $pop: {
+//             // 1 elimina el último elemento
+//             // -1 elimina el primer elemento
+//             reading: 1
+//         }
+//     }
+// )
+
+
+
+
+db.iot.updateOne(
+    {
+        sensor: "A001",
+        date: "2020-01-01"
+    },
+    {
+        $push: {
+            reading: 456
+        }
+    }
+)

@@ -1,0 +1,68 @@
+use("platzi_store");
+
+
+
+// $in [este] o [este]
+// $in nos permite buscar en un array de valores que nosotros le pasemos
+db.inventory.find(
+    {
+        tags: {
+            $in: ["book", "electronics"]
+        }
+    }
+)
+
+
+
+// $nin [este] o [este]
+// $nin busca los valores que no estén en el array que nosotros le pasemos
+db.inventory.find(
+    {
+        tags: {
+            $nin: ["book", "electronics"]
+        }
+    }
+)
+
+
+
+// $all [este] y [este] Sin importar el orden
+// $all nos sirve para buscar todos los valores que estén en el array que nosotros le pasemos
+db.inventory.find(
+    {
+        tags: {
+            $all: ["book", "school"]
+        }
+    }
+)
+
+
+
+
+// $size [tamaño] del array que nosotros le pasemos
+// $size nos permite buscar un array que tenga el tamaño que nosotros le pasemos
+db.inventory.find(
+    {
+        tags: {
+            $size: 3
+        }
+    }
+)
+
+
+
+
+// $elemMatch {condiciones} del array que nosotros le pasemos
+// $elemMatch nos permite buscar un array que cumpla con las condiciones que nosotros le pasemos
+db.survey.find(
+    {
+        results: {
+            $elemMatch: {
+                product: "xyz",
+                score: {
+                    $gte: 7
+                }
+            }
+        }
+    }
+)

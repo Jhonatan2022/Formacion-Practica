@@ -1,0 +1,20 @@
+use("platzi_store");
+
+
+// regex nos sirve para hacer busquedas de texto
+// Expresiones regulares 
+// /line/ -> Busca la palabra line
+// /^line/ -> Busca la palabra line al inicio
+// /line$/ -> Busca la palabra line al final
+// /^line$/ -> Busca la palabra line al inicio y al final
+// /.*line.*/ -> Busca la palabra line en cualquier parte del texto
+// /.*line.*/i -> Busca la palabra line en cualquier parte del texto sin importar mayusculas o minusculas
+// /line|line/ -> Busca la palabra line o line
+// /line/im -> Busca la palabra line teniendo en cuenta los saltos de linea
+db.inventory.find(
+    {
+        "item.description": {
+            $regex: /.*S.*/im
+        }
+    }
+)

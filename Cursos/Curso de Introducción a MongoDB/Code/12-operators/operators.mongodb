@@ -1,0 +1,37 @@
+use("platzi_store");
+
+
+// $gt (Mayor que >)
+// $gte (Mayor o igual que >=)
+db.inventory.find(
+    {
+        qty: {
+            $gte: 20
+        }
+    }
+)
+
+
+
+// $lt (Menor que <)
+// $lte (Menor o igual que <=)
+db.inventory.find(
+    {
+        qty: {
+            $lte: 20
+        }
+    }
+)
+
+
+
+// JOIN
+db.inventory.find(
+    {
+        "item.code": "123",
+        qty: {
+            $gte: 20,
+            $lte: 25
+        }
+    }
+)

@@ -1,0 +1,30 @@
+use("platzi_store");
+
+
+// Removiendo un solo elemento de un array
+// db.inventory.updateMany(
+//     // Dejamos el query vacio para que actualice todos los documentos
+//     {},
+//     {
+//         // pull nos permite eliminar un elemento de un array
+//         $pull: {
+//             tags: "book"
+//         }
+//     }
+// )
+
+
+
+// Removindo varios elementos de un array
+db.inventory.updateMany(
+    // Dejamos el query vacio para que actualice todos los documentos
+    {},
+    {
+        // pull nos permite eliminar un elemento de un array
+        $pull: {
+            tags:{
+                $in: ["school", "appliance"]
+            }
+        }
+    }
+)
