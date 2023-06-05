@@ -1,0 +1,40 @@
+use("platzi_store")
+
+
+// vaciamos la colección
+db.products.drop()
+
+
+// Insertar varios documentos
+db.products.insertMany([
+    {
+        _id: 1,
+        name: "Producto 1",
+        price: 1000,
+    },
+    {
+        _id: 2,
+        name: "Producto 2",
+        price: 2000,
+    },
+    {
+        _id: 3,
+        name: "Producto 3",
+        price: 3000,
+    },
+    {
+        _id: 1,
+        name: "hola",
+        price: 10000000,
+    },
+    {
+        _id: 4,
+        name: "Producto 4",
+        price: 4000,
+    }
+],{
+    // Sive para que si hay un error en la inserción de un documento, no se inserte ninguno pero continue con los demás
+    ordered: false
+})
+
+db.products.find()

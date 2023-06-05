@@ -1,0 +1,12 @@
+use("platzi_store")
+
+
+// Actualización por medio de odjectId
+db.products.updateOne(
+    { _id: ObjectId("5f8b7b3b9c0b9e2b4c6d3b1d") },
+    {
+        $inc: {
+            price: 100
+        }
+    }
+)

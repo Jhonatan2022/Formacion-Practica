@@ -1,0 +1,21 @@
+use("platzi_store")
+
+
+// Insertar un documento
+db.products.insertOne({
+    name: "Producto 1",
+    price: 1000,
+})
+
+
+db.products.insertOne({
+    name: "Producto 2",
+    price: 2000,
+})
+
+
+db.products.insertOne({
+    _id: 1,
+    name: "Producto 3",
+    price: 3000,
+})
