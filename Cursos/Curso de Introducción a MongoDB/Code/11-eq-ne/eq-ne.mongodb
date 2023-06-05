@@ -1,0 +1,31 @@
+use("platzi_store");
+
+// eq nos permite buscar documentos que tengan un valor igual al que estamos buscando
+// db.inventory.find(
+//     {
+//         qty: {
+//             $eq: 20
+//         }
+//     }
+// )
+
+
+// db.inventory.find(
+//     {
+//         "item.code": {
+//             $eq: "123"
+//         }
+//     }
+// )
+
+
+
+
+// ne nos permite buscar documentos que tengan un valor diferente al que estamos buscando
+db.inventory.find(
+    {
+        qty: {
+            $ne: 20
+        }
+    }
+)

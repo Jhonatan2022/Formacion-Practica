@@ -1,0 +1,16 @@
+use("platzi_store");
+
+
+
+// Eliminando documentos
+//  db.products.deleteOne({ _id: 1 });
+
+
+// Eliminando varios documentos
+db.products.deleteMany(
+    { price: 100 }
+);
+
+
+// Eliminando todos los documentos
+db.products.drop(); // Elimina la colección 

@@ -1,0 +1,19 @@
+use("platzi_store")
+
+
+
+// Haciendo un update con condicionales
+db.iot.updateMany(
+    // QUERY
+    {
+        sensor: "A001"
+    },
+    // UPDATE
+    {
+        $pull: {
+            readings: {
+                $gte: 3
+            }
+        }
+    }
+)

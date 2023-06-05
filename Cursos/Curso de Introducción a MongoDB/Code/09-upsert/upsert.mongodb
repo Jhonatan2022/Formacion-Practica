@@ -1,0 +1,19 @@
+use("platzi_store")
+
+
+
+db.iot.updateOne(
+    {
+        sensor: "A001",
+        date: "2020-01-04"
+    },
+    {
+        $push: {
+            reading: 12
+        }
+    },
+    {
+        // Si no existe el documento, lo crea con los valores especificados
+        upsert: true
+    }
+)
