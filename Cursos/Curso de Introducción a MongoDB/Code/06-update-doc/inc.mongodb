@@ -1,0 +1,14 @@
+use("platzi_store")
+
+
+// Inc nos sirve para incrementar un valor numérico en un documento
+db.products.updateOne(
+    {
+        _id: 1
+    },
+    {
+        $inc: {
+            price: 100
+        }
+    }
+)

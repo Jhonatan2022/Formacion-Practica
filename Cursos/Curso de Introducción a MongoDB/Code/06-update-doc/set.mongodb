@@ -1,0 +1,16 @@
+use("platzi_store")
+
+
+// Actualizar un documento
+db.products.updateOne(
+    // query
+    { _id: 4 },
+    // change => operators
+    {
+        $set: {
+            name: "Actualizado desde updateOne",
+            price: 100,
+            tags: ['A', 'B', 'C']
+        }
+    }
+)

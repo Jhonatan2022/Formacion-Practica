@@ -1,0 +1,13 @@
+use("platzi_store");
+
+
+
+db.inventory.updateOne(
+    { _id: 4 },
+    {
+        // push nos permite agregar un elemento a un array
+        $push: {
+            tags: "heahphone"
+        }
+    }
+)
