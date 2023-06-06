@@ -46,3 +46,10 @@
 
 [![](Certificados/Practico%20SQL.png)](https://drive.google.com/file/d/1sCkZvzUK_nhNGPfM9HO6vCQ82RZr__bs/view?usp=drive_link)
 </details>
+
+
+<details>
+<summary><strong style="font-size: 20px;">Certificado Introducción a MongoDB</strong></summary>
+
+[![](Certificados/MongoDB.png)](https://drive.google.com/file/d/1Qs84gTq3fWNWC22Q-lqhw1KylHUbqYpI/view?usp=drive_link)
+</details>
