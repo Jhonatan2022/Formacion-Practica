@@ -1,0 +1,3 @@
+use("platzi_store");
+
+db.categories.find().skip(3).limit(2);

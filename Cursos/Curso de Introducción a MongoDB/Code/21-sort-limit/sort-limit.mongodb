@@ -1,0 +1,11 @@
+use("sample_training");
+
+
+db.zips.find(
+    {
+        pop: { $gt: 100 }
+    }
+).sort({
+        // 1: asc, -1: desc
+        pop: -1
+    }).limit(5);

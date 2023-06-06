@@ -1,0 +1,28 @@
+use("sample_airbnb");
+
+db.listingsAndReviews.find(
+  {
+    amenities: "Wifi",
+  },
+  {
+    price: 1,
+    amenities: 1,
+  }
+);
+
+// Agreration Framework nos permite hacer consultas más complejas
+db.listingsAndReviews.aggregate([
+  {
+    $match: {
+      amenities: "Wifi",
+    },
+  },
+  {
+    $project: {
+      address: 1,
+    },
+  },
+  {
+    $group: { _id: "$address.country", count: { $sum: 1 } },
+  },
+]);
