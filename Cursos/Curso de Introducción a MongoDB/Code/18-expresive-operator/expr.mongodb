@@ -1,0 +1,23 @@
+use("platzi_store")
+
+
+
+db.monthlyBudget.find(
+    {
+        spent: {
+            $gte: 100
+        }
+    }
+)
+
+
+
+// Con expresive operator
+// $expr permite usar operadores de agregación en consultas de find
+db.monthlyBudget.find(
+    {
+        $expr: {
+            $gte: ["$spent", "$budget"]
+        }
+    }
+)
