@@ -1,0 +1,26 @@
+use("platzi_store")
+
+db.stores.findOne({storeId: 'ST001'})
+db.stores_details.findOne({storeId: 'ST001'})
+
+
+// Consulta con agregación para obtener los datos de la tienda y los detalles  
+db.stores.aggregate([
+    {
+        // Se hace un join entre las dos colecciones
+        $lookup: {
+
+            // From es la colección con la que se va a hacer el join
+          from: 'stores_details',
+
+          // LocalField es el campo de la colección actual con el que se va a hacer el join
+          localField: 'storeId',
+
+          // ForeignField es el campo de la colección con la que se va a hacer el join
+          foreignField: 'storeId',
+
+          // As es el nombre del campo que se va a crear con los datos de la colección con la que se hace el join
+          as: 'detail'
+        }
+    }
+])

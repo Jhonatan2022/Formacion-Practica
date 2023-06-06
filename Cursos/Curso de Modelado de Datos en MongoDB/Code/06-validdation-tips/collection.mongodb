@@ -5,6 +5,8 @@ db.createCollection('users', {
         $jsonSchema: {
             bsonType: 'object',
             required: ['email', 'password', 'role'],
+            // Inactive the additionalProperties
+            additionalProperties: true,
             properties: {
                 name: {
                     bsonType: 'string'
