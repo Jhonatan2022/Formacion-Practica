@@ -1,0 +1,13 @@
+use("platzi_store")
+
+
+db.products.insertOne(
+    {
+        name: "Red laptop",
+        size: ["M"],
+        category: {
+            name: "Laptop",
+            image: "laptop.png"
+        }
+    }
+)

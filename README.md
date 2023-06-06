@@ -37,7 +37,7 @@
 <details>
 <summary><strong style="font-size: 20px;">Certificado Práctico de SQL y MySQL</strong></summary>
 
-[![](img/Practivo%20SQL%20y%20MYSQL.png)](https://drive.google.com/file/d/1dmJhU3ndfH6shFrC-vb8yGUoTU-FhTf3/view?usp=drive_link)
+[![](Certificados/Practivo%20SQL%20y%20MYSQL.png)](https://drive.google.com/file/d/1dmJhU3ndfH6shFrC-vb8yGUoTU-FhTf3/view?usp=drive_link)
 </details>
 
 
