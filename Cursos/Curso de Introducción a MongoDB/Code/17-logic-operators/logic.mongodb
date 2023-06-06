@@ -1,0 +1,64 @@
+use("sample_training")
+
+
+
+// Diferencia entre la forma implícita y explícita de hacer un $and
+// la forma implícita es la que se usa en la mayoría de los casos y la explícita es para casos muy específicos
+// la forma explícita es más estricta y la implícita es más flexible
+
+// And de forma implícita
+db.inspections.find(
+    {
+        sector: "Tax Preparers - 891",
+        result: "Unable to Locate"
+    }
+).count()
+
+// And de forma explícita
+db.inspections.find(
+    {
+        $and: [
+            {
+                sector: "Tax Preparers - 891"
+            },
+            {
+                result: "Unable to Locate"
+            }
+        ]
+    }
+).count()
+
+
+
+// $or nos permite buscar documentos que cumplan con una condición o con otra
+// $nor nos permite buscar documentos que no cumplan con una condición ni con otra
+db.inspections.find(
+    {
+        $nor: [
+            {
+                result: "No Violation Issued"
+            },
+            {
+                result: "Unable to Locate"
+            }
+        ]
+    },
+    {
+        result: 1,
+        _id: 0
+    }
+).count()
+
+
+
+
+// $not nos permite buscar documentos que no cumplan con una condición
+db.inspections.find(
+    {
+        result: {
+            $not:{
+                $regex: /No Violation Issued/im
+            }
+        }
+    }
+).count()
