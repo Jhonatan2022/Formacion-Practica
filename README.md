@@ -60,3 +60,10 @@
 
 [![](Certificados/Modelado%20de%20Datos%20Mongo.png)](https://drive.google.com/file/d/1eR_BE5BlC-YcC9sFg26rKMHPItHJQdx_/view?usp=drive_link)
 </details>
+
+
+<details>
+<summary><strong style="font-size: 20px;">Certificado Algoritmos y Diagramas de Flujo</strong></summary>
+
+[![](Certificados/Pensamiento%20logico.png)](https://drive.google.com/file/d/1hyd67JO8O8N6apVUtKD-25Lfn8O6Mt8H/view?usp=drive_link)
+</details>
