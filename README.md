@@ -53,3 +53,10 @@
 
 [![](Certificados/MongoDB.png)](https://drive.google.com/file/d/1Qs84gTq3fWNWC22Q-lqhw1KylHUbqYpI/view?usp=drive_link)
 </details>
+
+
+<details>
+<summary><strong style="font-size: 20px;">Certificado Modelado de Datos en MongoDB</strong></summary>
+
+[![](Certificados/Modelado%20de%20Datos%20Mongo.png)](https://drive.google.com/file/d/1eR_BE5BlC-YcC9sFg26rKMHPItHJQdx_/view?usp=drive_link)
+</details>
