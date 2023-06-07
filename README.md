@@ -6,6 +6,7 @@
 </details>
 
 
+---
 <details>
 <summary><strong style="font-size: 20px;">Certificado Profesional de Git y GitHub</strong></summary>
 
@@ -27,6 +28,7 @@
 </details>
 
 
+---
 <details>
 <summary><strong style="font-size: 20px;">Certificado Fundamentos de Bases de Datos</strong></summary>
 
@@ -48,6 +50,7 @@
 </details>
 
 
+---
 <details>
 <summary><strong style="font-size: 20px;">Certificado Introducción a MongoDB</strong></summary>
 
@@ -62,8 +65,16 @@
 </details>
 
 
+---
 <details>
 <summary><strong style="font-size: 20px;">Certificado Algoritmos y Diagramas de Flujo</strong></summary>
 
 [![](Certificados/Pensamiento%20logico.png)](https://drive.google.com/file/d/1hyd67JO8O8N6apVUtKD-25Lfn8O6Mt8H/view?usp=drive_link)
+</details>
+
+
+<details>
+<summary><strong style="font-size: 20px;">Certificado Lenguajes de Programación</strong></summary>
+
+[![](Certificados/Logica%20programación.png)](https://drive.google.com/file/d/1AnWK-enuGoTyJnDn9JkgECR9vJGnqObm/view?usp=drive_link)
 </details>
