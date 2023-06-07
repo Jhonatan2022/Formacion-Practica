@@ -74,6 +74,13 @@
 
 
 <details>
+<summary><strong style="font-size: 20px;">Certificado Manejo de Datos, Estructuras y Funciones</strong></summary>
+
+[![](Certificados/Estructuras%20logicas.png)](https://drive.google.com/file/d/1MPzfVj8KzqAifU0Ju73MgNpGa9uEVEXm/view?usp=drive_link)
+</details>
+
+
+<details>
 <summary><strong style="font-size: 20px;">Certificado Lenguajes de Programación</strong></summary>
 
 [![](Certificados/Logica%20programación.png)](https://drive.google.com/file/d/1AnWK-enuGoTyJnDn9JkgECR9vJGnqObm/view?usp=drive_link)
