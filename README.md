@@ -85,3 +85,11 @@
 
 [![](Certificados/Logica%20programación.png)](https://drive.google.com/file/d/1AnWK-enuGoTyJnDn9JkgECR9vJGnqObm/view?usp=drive_link)
 </details>
+
+
+---
+<details>
+<summary><strong style="font-size: 20px;">Certificado Excel para Principiantes</strong></summary>
+
+[![](Certificados/Introducción%20excel.png)](https://drive.google.com/file/d/1h-3Pl9cisuCN5i4Nm6GO7I-U5zM3dFHh/view?usp=drive_link)
+</details>
