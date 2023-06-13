@@ -100,3 +100,10 @@
 
 [![](Certificados/Excel%20Básico.png)](https://drive.google.com/file/d/1OTFMZsAEWe13XVWxSAH4L9jkw1j41km8/view?usp=drive_link)
 </details>
+
+
+<details>
+<summary><strong style="font-size: 20px;">Certificado Excel Básico</strong></summary>
+
+[![](Certificados/Visualizacion%20de%20datos.png)](https://drive.google.com/file/d/1XJODnSn2MJXkucEBXaOQbo8-kP49s6_i/view?usp=drive_link)
+</details>
