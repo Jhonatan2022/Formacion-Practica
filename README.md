@@ -93,3 +93,10 @@
 
 [![](Certificados/Introducción%20excel.png)](https://drive.google.com/file/d/1h-3Pl9cisuCN5i4Nm6GO7I-U5zM3dFHh/view?usp=drive_link)
 </details>
+
+
+<details>
+<summary><strong style="font-size: 20px;">Certificado Excel Básico</strong></summary>
+
+[![](Certificados/Excel%20Básico.png)](https://drive.google.com/file/d/1OTFMZsAEWe13XVWxSAH4L9jkw1j41km8/view?usp=drive_link)
+</details>
