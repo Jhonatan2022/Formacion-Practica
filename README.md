@@ -103,7 +103,7 @@
 
 
 <details>
-<summary><strong style="font-size: 20px;">Certificado Excel Básico</strong></summary>
+<summary><strong style="font-size: 20px;">Certificado Visualización De Datos</strong></summary>
 
 [![](Certificados/Visualizacion%20de%20datos.png)](https://drive.google.com/file/d/1XJODnSn2MJXkucEBXaOQbo8-kP49s6_i/view?usp=drive_link)
 </details>
