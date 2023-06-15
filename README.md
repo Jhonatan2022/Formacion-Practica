@@ -1,12 +1,5 @@
 # Formacion-Practicante <a href="mailto:florezj328@gmail.com"> <img src="https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white" width="80px" alt="Jhonattan Florez"/> </a>
-<details>
-<summary><strong style="font-size: 20px;">Certificado Introducción</strong></summary>
 
-[![](Certificados/Introducción.png)](https://drive.google.com/file/d/1nxJHNRBWy02uzFMXRdlTGpPwmBVfapTT/view?usp=drive_link)
-</details>
-
-
----
 <details>
 <summary><strong style="font-size: 20px;">Certificado Profesional de Git y GitHub</strong></summary>
 
@@ -102,6 +95,14 @@
 </details>
 
 
+<details>
+<summary><strong style="font-size: 20px;">Certificado Excel Intermedio</strong></summary>
+
+[![](Certificados/Excel%20Intermedio.png)](https://drive.google.com/file/d/1dNSsMpVcRAe0zz05xgKbAKu747QnhLko/view?usp=drive_link)
+</details>
+
+
+---
 <details>
 <summary><strong style="font-size: 20px;">Certificado Visualización De Datos</strong></summary>
 
