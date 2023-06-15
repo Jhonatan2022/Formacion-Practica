@@ -102,6 +102,13 @@
 </details>
 
 
+<details>
+<summary><strong style="font-size: 20px;">Certificado Excel Avanzado con Macros</strong></summary>
+
+[![](Certificados/Excel%20Con%20Macros.png)](https://drive.google.com/file/d/1_u43rJRiJRYVUQKhRsS4XDTH3rW37y0M/view?usp=drive_link)
+</details>
+
+
 ---
 <details>
 <summary><strong style="font-size: 20px;">Certificado Visualización De Datos</strong></summary>
