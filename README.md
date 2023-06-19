@@ -109,6 +109,12 @@
 </details>
 
 
+<details>
+<summary><strong style="font-size: 20px;">Certificado Excel Avanzado para Análisis de Datos</strong></summary>
+
+[![](Certificados/Excel%20Para%20Analisis%20De%20Datos.png)](https://drive.google.com/file/d/1AfFGHbOnrPM4wlGFdtEbnKuSASqO17st/view?usp=drive_link)
+</details>
+
 ---
 <details>
 <summary><strong style="font-size: 20px;">Certificado Visualización De Datos</strong></summary>
