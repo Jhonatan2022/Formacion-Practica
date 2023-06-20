@@ -7,13 +7,6 @@
 </details>
 
 
-<details>
-<summary><strong style="font-size: 20px;">Certificado Introducción a la Terminal y Línea de Comandos</strong></summary>
-
-[![](Certificados/Terminal.png)](https://drive.google.com/file/d/18_5xC1ZlVZydI-TEIRX8JWQqfAO4fDq0/view?usp=drive_link)
-</details>
-
-
 ---
 <details>
 <summary><strong style="font-size: 20px;">Certificado Práctico de SQL y MySQL</strong></summary>
