@@ -8,17 +8,17 @@ print(tasks)
 types = [1, True, 'hola']
 print(types)
 
-print(numbers[0])
-print(tasks[0])
+print(numbers[0]) # 1
+print(tasks[0]) # make a dishes
 text = 'Hola'
 # text[0] = 'W'
 
-tasks[0] = 'watch platzi courses'
-print(tasks)
+tasks[0] = 'watch platzi courses' 
+print(tasks) # ['watch platzi courses', 'play videogames']
 
 tasks[0] = 'do the dishes'
-print(tasks)
+print(tasks) # ['do the dishes', 'play videogames']
 
-print(numbers[:3])
-print(True in types)
-print('hola' in types)
+print(numbers[:3]) # [1, 2, 3]
+print(True in types) # True
+print('hola' in types) # True
