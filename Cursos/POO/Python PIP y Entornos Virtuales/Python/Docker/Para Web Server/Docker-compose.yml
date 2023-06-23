@@ -1,0 +1,29 @@
+services:
+  Web-server:
+    build:
+      context: . # Contexto de la carpeta del proyecto
+      dockerfile: Dockerfile
+
+    # Enlace a la carpeta del proyecto
+    volumes:
+      - .:/app
+
+    # Enlazando puertos
+    ports:
+      - '8080:80'
+
+# Para iniciar el contenedor
+# Docker-compose build
+
+
+# Para iniciar el contenedor
+# Docker-compose up -d
+
+# Para conectarse al contenedor
+# Docker-compose exec app-csv bash
+
+# Para detener el contenedor
+# Docker-compose down
+
+# Para salir del contenedor
+# exit
