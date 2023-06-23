@@ -1,0 +1,25 @@
+services:
+  app-csv:
+    build:
+      context:
+        dockerfile: Dockerfile
+
+      # Enlace a la carpeta del proyecto
+      volumes:
+        - .:/app
+
+# Para iniciar el contenedor
+# Docker-compose build
+
+
+# Para iniciar el contenedor
+# Docker-compose up -d
+
+# Para conectarse al contenedor
+# Docker-compose exec app-csv bash
+
+# Para detener el contenedor
+# Docker-compose down
+
+# Para salir del contenedor
+# exit
