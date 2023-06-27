@@ -29,3 +29,11 @@
 
 [![](Certificados/Excel%20Para%20Analisis%20De%20Datos.png)](https://drive.google.com/file/d/1AfFGHbOnrPM4wlGFdtEbnKuSASqO17st/view?usp=drive_link)
 </details>
+
+
+---
+<details>
+<summary><strong style="font-size: 20px;">Certificado Comprehensions, Funciones y Manejo de Errores</strong></summary>
+
+[![](Certificados/Python%20Comprhension.png)](https://drive.google.com/file/d/1TMAmmTHuy9K3DDOyyVgu8WWfni3gKJrz/view?usp=drive_link)
+</details>
