@@ -12,3 +12,12 @@ IDENTIFIED BY
 DROP USER
     -- Indicamos el nombre del usuario
     'soporte'@'localhost';
+
+
+-- Asignamos todos los privilegios al usuario que creamos 
+GRANT ALL PRIVILEGES ON * . * TO 'soporte'@'localhost';
+
+
+
+---- Actualizamos los privilegios
+FLUSH PRIVILEGES;
