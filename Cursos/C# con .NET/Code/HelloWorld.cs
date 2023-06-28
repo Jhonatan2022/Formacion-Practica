@@ -312,6 +312,9 @@ int totalDealer = 0;
 // Numero de carta
 int num = 0;
 
+// Contador creditos
+int creditos = 0;
+
 // Switch controler
 string switchControler = "menu";
 
@@ -324,70 +327,86 @@ string controlCarta = "";
 // Instanciamos la clase Random para generar numeros aleatorios
 System.Random Ramdom = new System.Random();
 
+
+
 while (true)
 {
 
-    // Reseteamos los valores de las variables
-    totalJugador = 0;
-    totalDealer = 0;
+    // Limpia la consola
+    Console.Clear();
+    Console.WriteLine("Bienvenido al C A S I N O");
+    Console.WriteLine("Cuántos creditos desea ? (necesitas una por ronda)");
+    // parse = convertir de string a int
+    creditos = int.Parse(Console.ReadLine());
+    // creditos = Convert.ToInt32(Console.ReadLine());
 
-
-    switch (switchControler)
+    for (int deuda = 0; deuda < creditos; deuda++)
     {
 
-        case "menu":
-            Console.WriteLine("Bienvenido al C A S I N O");
-            Console.WriteLine("Escriba 'jugar' para empezar a jugar");
-            switchControler = Console.ReadLine();
-            break;
-
-        case "jugar":
-            do
-            {
-                num = Ramdom.Next(1, 12);
-                totalJugador += num;
-                Console.WriteLine($"Te salio la carta: {num}");
-                Console.WriteLine($"Tu total es: {totalJugador}");
-                Console.WriteLine("Desea continuar? S/N");
-                controlCarta = Console.ReadLine();
-
-            } while (controlCarta == "S" || controlCarta == "s");
+        // Reseteamos los valores de las variables
+        totalJugador = 0;
+        totalDealer = 0;
 
 
-            // Puntaje dealer
-            totalDealer = Ramdom.Next(14, 21);
+        switch (switchControler)
+        {
 
-            if (totalJugador > totalDealer && totalJugador <= 21)
-            {
-                message = $"Ganaste \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
-                switchControler = "menu";
-            }
-            else if (totalJugador < totalDealer && totalDealer <= 21)
-            {
-                message = $"Perdiste \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
-                switchControler = "menu";
-            }
-            else if (totalJugador == totalDealer && totalDealer <= 21)
-            {
-                message = $"Empate \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
-                switchControler = "menu";
-            }
-            else if (totalJugador > 21)
-            {
-                message = $"Perdiste superaste 21 \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
-                switchControler = "menu";
-            }
-            else
-            {
-                message = "No es un valor valido";
-                switchControler = "menu";
-            }
+            case "menu":
+                Console.WriteLine("Escriba 'jugar' para empezar a jugar");
+                switchControler = Console.ReadLine();
+                deuda = deuda - 1;
+                break;
 
-            Console.WriteLine(message);
-            break;
+            case "jugar":
+                do
+                {
+                    num = Ramdom.Next(1, 12);
+                    totalJugador += num;
+                    Console.WriteLine($"Te salio la carta: {num}");
+                    Console.WriteLine($"Tu total es: {totalJugador}");
+                    Console.WriteLine("Desea continuar? S/N");
+                    controlCarta = Console.ReadLine();
 
-        default:
-            Console.WriteLine("No es un valor valido");
-            break;
+                } while (controlCarta == "S" || controlCarta == "s");
+
+
+                // Puntaje dealer
+                totalDealer = Ramdom.Next(14, 21);
+
+                if (totalJugador > totalDealer && totalJugador <= 21)
+                {
+                    message = $"Ganaste \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
+                    switchControler = "menu";
+                    creditos += 1;
+                }
+                else if (totalJugador < totalDealer && totalDealer <= 21)
+                {
+                    message = $"Perdiste \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
+                    switchControler = "menu";
+                }
+                else if (totalJugador == totalDealer && totalDealer <= 21)
+                {
+                    message = $"Empate \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
+                    switchControler = "menu";
+                }
+                else if (totalJugador > 21)
+                {
+                    message = $"Perdiste superaste 21 \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
+                    switchControler = "menu";
+                }
+                else
+                {
+                    message = "No es un valor valido";
+                    switchControler = "menu";
+                }
+
+                Console.WriteLine(message);
+                break;
+
+            default:
+                Console.WriteLine("No es un valor valido");
+                break;
+        }
+    
     }
 }
