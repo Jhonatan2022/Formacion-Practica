@@ -14,7 +14,7 @@ ladoA = Convert.ToDouble(Console.ReadLine());
 Console.WriteLine("ingrese el lado B");
 ladoB = Convert.ToDouble(Console.ReadLine());
 
-result = (ladoA * ladoB)/2;
+result = (ladoA * ladoB) / 2;
 // residuo
 // result = (ladoA * ladoB)%2;
 
@@ -125,15 +125,269 @@ totalDealer = Convert.ToInt32(Console.ReadLine());
 string message = "";
 
 
-if (totalJugador > totalDealer && totalJugador <= 21){
+if (totalJugador > totalDealer && totalJugador <= 21)
+{
     message = "Ganaste";
-} else if (totalJugador < totalDealer && totalDealer <= 21){
+}
+else if (totalJugador < totalDealer && totalDealer <= 21)
+{
     message = "Perdiste";
-} else if (totalJugador == totalDealer && totalDealer <= 21){
+}
+else if (totalJugador == totalDealer && totalDealer <= 21)
+{
     message = "Empate";
-} else {
+}
+else
+{
     message = "No es un valor valido";
 }
 
 
 Console.WriteLine(message);
+//--------------------------------------------------------------------------------------------
+
+
+
+
+// Condicional Switch
+// Blackjack, juntar 21 pidiendo cartas o en caso de tener menos de 21, tener mas puntos que el dealer
+
+
+
+// Jugador
+int totalJugador = 0;
+Console.WriteLine("Ingrese el valor del jugador");
+totalJugador = Convert.ToInt32(Console.ReadLine());
+
+// Dealer
+int totalDealer = 0;
+Console.WriteLine("Ingrese el valor del dealer");
+totalDealer = Convert.ToInt32(Console.ReadLine());
+
+// Switch controler
+string switchControler = "menu";
+
+// Mensaje
+string message = "";
+
+
+
+switch (switchControler)
+{
+
+    case "menu":
+        Console.WriteLine("Bienvenido al C A S I N O");
+        Console.WriteLine("Escriba 'jugar' para empezar a jugar");
+        switchControler = Console.ReadLine();
+        break;
+
+    case "jugar":
+        if (totalJugador > totalDealer && totalJugador <= 21)
+        {
+            message = "Ganaste";
+        }
+        else if (totalJugador < totalDealer && totalDealer <= 21)
+        {
+            message = "Perdiste";
+        }
+        else if (totalJugador == totalDealer && totalDealer <= 21)
+        {
+            message = "Empate";
+        }
+        else
+        {
+            message = "No es un valor valido";
+        }
+
+        Console.WriteLine(message);
+        break;
+
+    default:
+        Console.WriteLine("No es un valor valido");
+        break;
+}
+//--------------------------------------------------------------------------------------------
+
+
+
+
+// Ciclo While (Mientras) y Do While (Hacer mientras)
+// Blackjack, juntar 21 pidiendo cartas o en caso de tener menos de 21, tener mas puntos que el dealer
+// Jugador
+int totalJugador = 0;
+
+// Dealer
+int totalDealer = 0;
+
+// Numero de carta
+int num = 0;
+
+// Switch controler
+string switchControler = "menu";
+
+// Mensaje
+string message = "";
+
+// Control de carta
+string controlCarta = "";
+
+// Instanciamos la clase Random para generar numeros aleatorios
+System.Random Ramdom = new System.Random();
+
+while (true)
+{
+
+    // Reseteamos los valores de las variables
+    totalJugador = 0;
+    totalDealer = 0;
+
+
+    switch (switchControler)
+    {
+
+        case "menu":
+            Console.WriteLine("Bienvenido al C A S I N O");
+            Console.WriteLine("Escriba 'jugar' para empezar a jugar");
+            switchControler = Console.ReadLine();
+            break;
+
+        case "jugar":
+            do
+            {
+                num = Ramdom.Next(1, 12);
+                totalJugador += num;
+                Console.WriteLine($"Te salio la carta: {num}");
+                Console.WriteLine($"Tu total es: {totalJugador}");
+                Console.WriteLine("Desea continuar? S/N");
+                controlCarta = Console.ReadLine();
+
+            } while (controlCarta == "S" || controlCarta == "s");
+
+
+            // Puntaje dealer
+            totalDealer = Ramdom.Next(14, 21);
+
+            if (totalJugador > totalDealer && totalJugador <= 21)
+            {
+                message = $"Ganaste \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
+                switchControler = "menu";
+            }
+            else if (totalJugador < totalDealer && totalDealer <= 21)
+            {
+                message = $"Perdiste \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
+                switchControler = "menu";
+            }
+            else if (totalJugador == totalDealer && totalDealer <= 21)
+            {
+                message = $"Empate \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
+                switchControler = "menu";
+            }
+            else
+            {
+                message = "No es un valor valido";
+                switchControler = "menu";
+            }
+
+            Console.WriteLine(message);
+            break;
+
+        default:
+            Console.WriteLine("No es un valor valido");
+            break;
+    }
+}
+//--------------------------------------------------------------------------------------------
+
+
+
+
+// Ciclo For (Para)
+// Blackjack, juntar 21 pidiendo cartas o en caso de tener menos de 21, tener mas puntos que el dealer
+// Jugador
+int totalJugador = 0;
+
+// Dealer
+int totalDealer = 0;
+
+// Numero de carta
+int num = 0;
+
+// Switch controler
+string switchControler = "menu";
+
+// Mensaje
+string message = "";
+
+// Control de carta
+string controlCarta = "";
+
+// Instanciamos la clase Random para generar numeros aleatorios
+System.Random Ramdom = new System.Random();
+
+while (true)
+{
+
+    // Reseteamos los valores de las variables
+    totalJugador = 0;
+    totalDealer = 0;
+
+
+    switch (switchControler)
+    {
+
+        case "menu":
+            Console.WriteLine("Bienvenido al C A S I N O");
+            Console.WriteLine("Escriba 'jugar' para empezar a jugar");
+            switchControler = Console.ReadLine();
+            break;
+
+        case "jugar":
+            do
+            {
+                num = Ramdom.Next(1, 12);
+                totalJugador += num;
+                Console.WriteLine($"Te salio la carta: {num}");
+                Console.WriteLine($"Tu total es: {totalJugador}");
+                Console.WriteLine("Desea continuar? S/N");
+                controlCarta = Console.ReadLine();
+
+            } while (controlCarta == "S" || controlCarta == "s");
+
+
+            // Puntaje dealer
+            totalDealer = Ramdom.Next(14, 21);
+
+            if (totalJugador > totalDealer && totalJugador <= 21)
+            {
+                message = $"Ganaste \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
+                switchControler = "menu";
+            }
+            else if (totalJugador < totalDealer && totalDealer <= 21)
+            {
+                message = $"Perdiste \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
+                switchControler = "menu";
+            }
+            else if (totalJugador == totalDealer && totalDealer <= 21)
+            {
+                message = $"Empate \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
+                switchControler = "menu";
+            }
+            else if (totalJugador > 21)
+            {
+                message = $"Perdiste superaste 21 \n Puntaje dealer: {totalDealer} \n Puntaje jugador: {totalJugador}";
+                switchControler = "menu";
+            }
+            else
+            {
+                message = "No es un valor valido";
+                switchControler = "menu";
+            }
+
+            Console.WriteLine(message);
+            break;
+
+        default:
+            Console.WriteLine("No es un valor valido");
+            break;
+    }
+}
