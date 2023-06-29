@@ -24,3 +24,7 @@ dotnet run
 
 # Comando para compilar un proyecto de consola y verificando que no tenga errores o problemas con dependencias
 dotnet build
+
+
+# Comando para limpiar un proyecto de consola
+dotnet clean
