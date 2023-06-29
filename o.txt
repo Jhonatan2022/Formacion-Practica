@@ -1,0 +1,35 @@
+Columnas
+CodigoTercero
+NombreTercero
+Tercero concatena
+CentroDeCosto
+NombreCentroDeCosto
+NumeroContrato
+fecha inicio
+fecha final format d-m-y
+ciudad
+Vendedor - cedula - nombre
+UnidadDeNegocio
+Estado
+
+
+tablas usadas
+GN_CentroDeCosto
+GN_Cliente
+GN_Persona
+GN_TipoPersona
+GN_UbicacionCentroDeCosto
+GN_UnidadDeNegocio
+gn st estado
+
+
+credenciales
+ip: 10.10.100.23
+instancia: sql2022
+
+database: DEV-SIF
+
+
+
+
+
