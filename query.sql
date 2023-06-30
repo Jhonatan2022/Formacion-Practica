@@ -38,8 +38,8 @@ SELECT
     CC.CodigoCentroDeCosto AS CentroDeCosto,
     CC.NombreCentroDeCosto AS NombreCentroDeCosto,
     CC.NumeroContrato,
-    FORMAT(CC.FechaInicial, 'dd-MM-yyyy') AS FechaInicio,
-    FORMAT(CC.FechaFinal, 'dd-MM-yyyy') AS FechaFin,
+    FORMAT(CC.FechaInicial, 'dd/MM/yyyy') AS FechaInicio,
+    FORMAT(CC.FechaFinal, 'dd/MM/yyyy') AS FechaFin,
     UBI.NombreUbicacionCentroDeCosto AS Ciudad,
     CONCAT(
         UNN.CodigoUnidadDeNegocio,
@@ -49,7 +49,7 @@ SELECT
     CC.CodigoEstado AS Estado
 FROM
     GN_CentroDeCosto AS CC
-    INNER JOIN GN_Cliente AS C ON CC.CodigoPersona = C.CodigoPersona
-    LEFT JOIN GN_Persona AS P ON C.CodigoPersona = P.CodigoPersona
+    INNER JOIN GN_Cliente AS C ON CC.CodigoPersona = C.CodigoPersona cambiar por left join
+    LEFT JOIN GN_Persona AS P ON C.CodigoPersona = P.CodigoPersona cambiar por inner join
     LEFT JOIN GN_UbicacionCentroDeCosto AS UBI ON CC.Ubicacion = UBI.CodigoUbicacionCentroDeCosto
     LEFT JOIN GN_UnidadDeNegocio AS UNN ON CC.CodigoUnidadDeNegocio = UNN.CodigoUnidadDeNegocio;

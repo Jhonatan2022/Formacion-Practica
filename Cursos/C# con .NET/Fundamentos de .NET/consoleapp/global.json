@@ -1,0 +1,7 @@
+{
+  "sdk": {
+    "version": "7.0.304",
+    "allowPrerelease": false,
+    "_Comentario": "allowPrerelease nos sirve para que no nos instale versiones beta del sdk "
+  }
+}
