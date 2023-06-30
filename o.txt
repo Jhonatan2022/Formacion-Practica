@@ -1,14 +1,14 @@
 Columnas
 CodigoTercero
 NombreTercero
-Tercero concatena
+Tercero = CodigoTercero + NombreTercero
 CentroDeCosto
 NombreCentroDeCosto
 NumeroContrato
-fecha inicio
-fecha final format d-m-y
-ciudad
-Vendedor - cedula - nombre
+FechaInicio = 01/01/1900 tienen que convertirse a null
+FechaFin format d/m/y
+Ciudad
+Vendedor = CodigoVendedor - NombreTercero
 UnidadDeNegocio
 Estado
 
@@ -20,16 +20,10 @@ GN_Persona
 GN_TipoPersona
 GN_UbicacionCentroDeCosto
 GN_UnidadDeNegocio
-gn st estado
+ST_Estado
 
 
 credenciales
 ip: 10.10.100.23
 instancia: sql2022
-
 database: DEV-SIF
-
-
-
-
-
