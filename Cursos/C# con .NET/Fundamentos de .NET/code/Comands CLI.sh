@@ -44,3 +44,6 @@ dotnet new globaljson
 
 # Comando para ver las versiones de .NET instaladas
 dotnet --info
+
+
+# Instalando un paquete de .net (Humanizer)
