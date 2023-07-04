@@ -23,7 +23,7 @@ GN_UnidadDeNegocio
 ST_Estado
 
 
-credenciales
+checklist   
 ip: 10.10.100.23
 instancia: sql2022
 database: DEV-SIF

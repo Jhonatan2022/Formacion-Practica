@@ -59,4 +59,6 @@ FROM
     LEFT JOIN GN_UbicacionCentroDeCosto AS UBI ON CC.Ubicacion = UBI.CodigoUbicacionCentroDeCosto
     LEFT JOIN GN_UnidadDeNegocio AS UND ON CC.CodigoUnidadDeNegocio = UND.CodigoUnidadDeNegocio
     LEFT JOIN ST_Estado AS ST ON CC.CodigoEstado = ST.CodigoEstado
-    LEFT JOIN GN_Persona AS VEN ON CC.CodigoVendedor = VEN.CodigoPersona;
+    JOIN GN_Persona AS VEN ON CC.CodigoVendedor = VEN.CodigoPersona
+ORDER BY
+    CC.CodigoPersona;
