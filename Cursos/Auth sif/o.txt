@@ -1,14 +1,15 @@
 Columnas
 CodigoTercero
 NombreTercero
-Tercero = CodigoTercero + NombreTercero
-CentroDeCosto
+Tercero (CodigoTercero + NombreTercero)
+CodigoCentroDeCosto
 NombreCentroDeCosto
+CentroDeCosto (CodigoCentroDeCosto + NombreCentroDeCosto)
 NumeroContrato
 FechaInicio = 01/01/1900 tienen que convertirse a null
 FechaFin format d/m/y
 Ciudad
-Vendedor = CodigoVendedor - NombreTercero
+Vendedor (CodigoVendedor + NombreTercero)
 UnidadDeNegocio
 Estado
 
