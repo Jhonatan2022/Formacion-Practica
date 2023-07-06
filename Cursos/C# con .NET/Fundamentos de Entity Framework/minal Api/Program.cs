@@ -14,7 +14,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Registramos el contexto de la base de datos
 // Tiene que estar antes de la vatiable app para que funcione correctamente la base de datos en memoria
-builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
+// builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
+
+
+// Con sql server
+// Initial Catalog = Nombre de la base de datos
+builder.Services.AddSqlServer<TareasContext>("Data Source= Poner_Servidor;Initial Catalog=Nombre_Base_Datos;User ID=Usuario;Password=Contraseña");
+
 
 var app = builder.Build();
 
@@ -24,7 +30,7 @@ app.MapGet("/", () => "Hello World!");
 // Hacemos un mapeo para comprobar que funciona correctamente la base de datos
 app.MapGet("/dbconexion", async ([FromServices] TareasContext dbContext) => {
     dbContext.Database.EnsureCreated(); // Creamos la base de datos si no existe
-    return Results.Ok("Conexión establecida: " + dbContext.Database.IsInMemory());
+    return Results.Ok("La base de datos esta en memoria: " + dbContext.Database.IsInMemory());
 });
 
 
