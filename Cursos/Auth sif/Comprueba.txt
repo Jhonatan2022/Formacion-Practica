@@ -1,0 +1,36 @@
+USE DEV_SIF;
+SELECT * FROM GN_Persona WHERE CodigoPersona = '80266240';
+
+
+SELECT * FROM GN_CentroDeCosto WHERE CodigoVendedor IS NULL;
+SELECT * FROM GN_CentroDeCosto WHERE CodigoCentroDeCosto = '010200097';
+
+SELECT * FROM GN_Cliente WHERE CodigoPersona = '1111';
+SELECT * FROM GN_Persona WHERE CodigoPersona = '1111';
+SELECT * FROM GN_CentroDeCosto WHERE CodigoPersona = '1111';
+SELECT * FROM GN_CentroDeCosto WHERE CodigoPersona IS NULL;
+
+
+-- Cuantos coinciden
+SELECT
+	(
+		SELECT COUNT(*)
+		FROM GN_CentroDeCosto AS C
+		LEFT JOIN GN_Persona AS P ON C.CodigoPersona = P.CodigoPersona
+	) AS coincidentes_centrocosto_persona,
+    (
+        SELECT
+            COUNT(*)
+        FROM
+            GN_Persona AS P
+            JOIN GN_Cliente AS C ON P.CodigoPersona = C.CodigoPersona
+    ) AS coincidentes_cliente_persona,
+    (
+        SELECT
+            COUNT(*)
+        FROM
+            GN_CentroDeCosto AS CC
+            LEFT JOIN GN_Persona AS P ON CC.CodigoPersona = P.CodigoPersona
+            JOIN GN_Cliente AS C ON C.CodigoPersona = P.CodigoPersona
+			JOIN GN_Persona AS VEN ON CC.CodigoVendedor = VEN.CodigoPersona
+    ) AS coincidentes_todas_las_tablas ;
