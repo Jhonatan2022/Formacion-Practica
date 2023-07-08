@@ -1,6 +1,7 @@
 # Importamos FastAPI
 # Importamos Body para poder usar el metodo post y recibir datos en el body
-from fastapi import FastAPI, Body
+# Importamos path para poder usar parametros en la ruta
+from fastapi import FastAPI, Body, Path
 
 # Importamos htmlResponse para poder devolver código HTML
 from fastapi.responses import HTMLResponse
@@ -9,7 +10,8 @@ from fastapi.responses import HTMLResponse
 from fastapi import Request
 
 # Importamos BaseModel para poder usar validaciones
-from pydantic import BaseModel
+# Importamos Field para poder usar validaciones en los campos (requeridos, longitud, etc)
+from pydantic import BaseModel, Field
 
 # Importamso opional para poder usar validaciones
 from typing import Optional
@@ -31,12 +33,30 @@ app.version = "1.0.0" # Se verá en la documentación de la API
 
 # Creamos una clase movia que hereda de BaseModel para poder usar validaciones
 class Movie(BaseModel):
-    id: Optional[int] = None # Optional para que el id sea opcional
-    title: str
-    overview: str
-    year: str
-    rating: float
-    category: str
+    # Optional para que el id sea opcional
+    id: Optional[int] = None 
+    # Field para usar validaciones (requerido, longitud, etc
+    title: str = Field(min_length=2, max_length=50) 
+    overview: str = Field(min_length=2, max_length=50)
+    # le: es menor o igual, ge: es mayor o igual
+    year: str = Field(default=2023, le=2023, ge=1990) 
+    rating: float = Field(default=7.8, le=10, ge=1)
+    category: str = Field(min_length=6, max_length=20)
+
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "id": 1,
+                "title": "Film Title",
+                "overview": "Description of the film",
+                "year": 2023,
+                "rating": 7.8,
+                "category": "Action"
+            }
+        }
+
+
 
 
 # Creamos el diccionario que usarémos como base de datos
@@ -82,7 +102,7 @@ def get_movies():
 
 # Ruta con parametros
 @app.get("/movies/{id}" , tags=["Movies"])
-def get_movie(id: int):
+def get_movie(id: int = Path(ge=1)):
 
     # Buscamos la película por el id
     for movie in movies:
