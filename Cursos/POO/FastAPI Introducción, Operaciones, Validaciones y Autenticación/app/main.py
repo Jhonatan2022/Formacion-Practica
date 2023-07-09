@@ -1,10 +1,12 @@
 # Importamos FastAPI
 # Importamos Body para poder usar el metodo post y recibir datos en el body
 # Importamos path para poder usar parametros en la ruta
-from fastapi import FastAPI, Body, Path
+# Importamos Query para poder usar parametros query
+from fastapi import FastAPI, Body, Path, Query
 
 # Importamos htmlResponse para poder devolver código HTML
-from fastapi.responses import HTMLResponse
+# Importamos jsonResponse para poder devolver código JSON
+from fastapi.responses import HTMLResponse, JSONResponse
 
 # Importamos requests de fastapi para poder usar el metodo post
 from fastapi import Request
@@ -14,7 +16,8 @@ from fastapi import Request
 from pydantic import BaseModel, Field
 
 # Importamso opional para poder usar validaciones
-from typing import Optional
+# Importamos list para poder usar listas en las validaciones
+from typing import Optional, List
 #------------------------------IMPORT THIS-------------------------------------
 
 
@@ -93,59 +96,60 @@ def message():
 
 
 # Definimos otra ruta
-@app.get("/movies", tags=["Movies"])
-def get_movies():
-    return movies
+# Usamos response_model para devolver un modelo de datos en formato de lista (List[Movie])
+@app.get("/movies", tags=["Movies"], response_model=List[Movie])
+def get_movies() -> List[Movie]:
+
+    # status_code: para devolver un código de estado (200: OK, 404: Not Found, 500: Internal Server Error, etc)
+    return JSONResponse(content=movies, status_code=200)
 
 
 
 
 # Ruta con parametros
-@app.get("/movies/{id}" , tags=["Movies"])
-def get_movie(id: int = Path(ge=1)):
+@app.get("/movies/{id}" , tags=["Movies"], response_model=Movie)
+def get_movie(id: int = Path(ge=1)) -> Movie:
 
     # Buscamos la película por el id
     for movie in movies:
         if movie['id'] == id:
-            return movie
+            return JSONResponse(content=movie, status_code=200)
     
     # Si no se encuentra la película, devolvemos un mensaje
-    return {'message': 'Movie not found'}
+    return JSONResponse(content={'message': 'Movie not found'}, status_code=404)
 
 
 
 
 # Parametros query
-@app.get("/movies/", tags=["Movies"])
-def get_movies_category(category: str, year: int):
+@app.get("/movies/", tags=["Movies"], response_model=List[Movie])
+def get_movies_category(category: str = Query(min_length=6, max_length=20)) -> List[Movie]:
 
-    # Buscamos la película por la categoría y el año
-    for movie in movies:
-        if movie['category'] == category and movie['year'] == str(year):
-            return movie
+    # Buscamos la película por la categoría y el año y lo almacenamos en una variable
+    movies_found = [movie for movie in movies if movie['category'] == category]
         
     # Si no se encuentra la película, devolvemos un mensaje
-    return {'message': 'Movie not found'}
+    return JSONResponse(content=movies_found, status_code=200)
 
 
 
 
 # Metodo POST
-@app.post("/movies", tags=["Movies"])
-def add_movie(movie: Movie):
+@app.post("/movies", tags=["Movies"], response_model=List[Movie])
+def add_movie(movie: Movie) -> List[Movie]:
 
     # Agregamos la película a la base de datos
     movies.append(movie)    
 
     # Devolvemos la lista de películas actualizada
-    return movies
+    return JSONResponse(content={'message': 'Success', 'movies': movies}, status_code=201)
 
 
 
 
 # Metodo PUT
-@app.put("/movies/{id}", tags=["Movies"])
-def update_movie(id: int, movie: Movie):
+@app.put("/movies/{id}", tags=["Movies"], response_model=List[Movie])
+def update_movie(id: int, movie: Movie) -> List[Movie]:
 
     # Buscamos la película por el id
     for item in movies:
@@ -158,17 +162,17 @@ def update_movie(id: int, movie: Movie):
 
 
             # Devolvemos el id de la pelicula actualizada y la lista de películas actualizada
-            return {'message': 'Success Update','id': id, 'movies': movies}
+            return JSONResponse(content={'message': 'Movie updated', 'movie': item, 'movies': movies}, status_code=200)
     
     # Si no se encuentra la película, devolvemos un mensaje
-    return {'message': 'Movie not found'}
+    return JSONResponse(content={'message': 'Movie not found'}, status_code=404)
 
 
 
 
 # Metodo DELETE
-@app.delete("/movies/{id}", tags=["Movies"])
-def delete_movie(id: int):
+@app.delete("/movies/{id}", tags=["Movies"], response_model=List[Movie])
+def delete_movie(id: int) -> List[Movie]:
 
     # Buscamos la película por el id
     for movie in movies:
@@ -176,10 +180,10 @@ def delete_movie(id: int):
             movies.remove(movie)
 
             # Devolvemos un mensaje de confirmación con las películas actualizadas
-            return {'message': 'Movie deleted', 'movies': movies}
+            return JSONResponse(content={'message': 'Movie deleted', 'movies': movies}, status_code=200)
     
     # Si no se encuentra la película, devolvemos un mensaje
-    return {'message': 'Movie not found'}
+    return JSONResponse(content={'message': 'Movie not found'}, status_code=404)
 
 
 
