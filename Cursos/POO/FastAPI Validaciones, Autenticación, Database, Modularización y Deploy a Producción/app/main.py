@@ -30,6 +30,15 @@ from jwt_manager import create_token, validate_token
 
 # Importamos httpbearer para poder usar el metodo post y recibir datos en el body
 from fastapi.security import HTTPBearer
+
+# Importamos las variables de configuración de la base de datos
+from config.database import Session, engine, Base
+
+# Importamos el modelo de la base de datos
+from models.movie import Movie as MovieModel
+
+# Importamos jsonable_encoder para poder convertir los modelos de datos a JSON
+from fastapi.encoders import jsonable_encoder
 #------------------------------IMPORT THIS-------------------------------------
 
 
@@ -43,6 +52,11 @@ app.title = "My First API" # Se verá en la documentación de la API
 
 # Para asignar la versión de la API
 app.version = "0.0.1" # Se verá en la documentación de la API
+
+
+
+# Creamos la base de datos y las tablas
+Base.metadata.create_all(bind=engine)
 
 
 
@@ -153,8 +167,13 @@ def login(user: User):
 @app.get("/movies", tags=["Movies"], response_model=List[Movie], dependencies=[Depends(Auth())])
 def get_movies() -> List[Movie]:
 
+    db = Session()
+
+    # Obtenemos todas las películas de la base de datos
+    result = db.query(MovieModel).all()
+
     # status_code: para devolver un código de estado (200: OK, 404: Not Found, 500: Internal Server Error, etc)
-    return JSONResponse(content=movies, status_code=200)
+    return JSONResponse(content=jsonable_encoder(result), status_code=200)
 
 
 
@@ -163,13 +182,17 @@ def get_movies() -> List[Movie]:
 @app.get("/movies/{id}" , tags=["Movies"], response_model=dict)
 def get_movie(id: int = Path(ge=1)) -> dict:
 
-    # Buscamos la película por el id
-    for movie in movies:
-        if movie['id'] == id:
-            return JSONResponse(content=movie, status_code=200)
+    db = Session()
+
+    # Obtenemos la película por el id
+    result = db.query(MovieModel).filter(MovieModel.id == id).first()
+
+    # Si no se encuentra la película, devolvemos un mensaje
+    if not result:
+        return JSONResponse(content={'message': 'Movie not found'}, status_code=404)
     
     # Si no se encuentra la película, devolvemos un mensaje
-    return JSONResponse(content={'message': 'Movie not found'}, status_code=404)
+    return JSONResponse(content=jsonable_encoder(result), status_code=200)
 
 
 
@@ -178,11 +201,17 @@ def get_movie(id: int = Path(ge=1)) -> dict:
 @app.get("/movies/", tags=["Movies"], response_model=List[Movie])
 def get_movies_category(category: str = Query(min_length=6, max_length=20)) -> List[Movie]:
 
-    # Buscamos la película por la categoría y el año y lo almacenamos en una variable
-    movies_found = [movie for movie in movies if movie['category'] == category]
+    db = Session()
+
+    # Obtenemos todas las películas de la base de datos
+    result = db.query(MovieModel).filter(MovieModel.category == category).all()
+
+    # Si no se encuentra la película, devolvemos un mensaje
+    if not result:
+        return JSONResponse(content={'message': 'Movie not found'}, status_code=404)
         
     # Si no se encuentra la película, devolvemos un mensaje
-    return JSONResponse(content=movies_found, status_code=200)
+    return JSONResponse(content=jsonable_encoder(result), status_code=200)
 
 
 
@@ -191,11 +220,22 @@ def get_movies_category(category: str = Query(min_length=6, max_length=20)) -> L
 @app.post("/movies", tags=["Movies"], response_model=dict)
 def add_movie(movie: Movie) -> dict:
 
+    # Creamos una instancia de session
+    db = Session()
+
+    new_movie = MovieModel(**movie.dict())
+
+    # Agregamos la película a la base de datos
+    db.add(new_movie)
+
+    # Guardamos los cambios en la base de datos
+    db.commit()
+
     # Agregamos la película a la base de datos
     movies.append(movie)    
 
     # Devolvemos la lista de películas actualizada
-    return JSONResponse(content={'message': 'Movie added', 'movie': movie}, status_code=201)
+    return JSONResponse(content={'message': 'Movie added'}, status_code=201)
 
 
 
@@ -204,21 +244,27 @@ def add_movie(movie: Movie) -> dict:
 @app.put("/movies/{id}", tags=["Movies"], response_model=dict)
 def update_movie(id: int, movie: Movie) -> dict:
 
-    # Buscamos la película por el id
-    for item in movies:
-        if item['id'] == id:
-            item['title'] = movie.title
-            item['overview'] = movie.overview
-            item['year'] = movie.year
-            item['rating'] = movie.rating
-            item['category'] = movie.category
+    db = Session()
 
+    # Obtenemos la película por el id
+    result = db.query(MovieModel).filter(MovieModel.id == id).first()
 
-            # Devolvemos el id de la pelicula actualizada y la lista de películas actualizada
-            return JSONResponse(content={'message': 'Movie updated', 'movie': item}, status_code=200)
-    
     # Si no se encuentra la película, devolvemos un mensaje
-    return JSONResponse(content={'message': 'Movie not found'}, status_code=404)
+    if not result:
+        return JSONResponse(content={'message': 'Movie not found'}, status_code=404)
+
+    # Actualizamos la película
+    result.title = movie.title
+    result.overview = movie.overview
+    result.year = movie.year
+    result.rating = movie.rating
+    result.category = movie.category
+
+    # Guardamos los cambios en la base de datos
+    db.commit()
+
+    # Si no se encuentra la película, devolvemos un mensaje
+    return JSONResponse(content={'message': 'Update success'}, status_code=200)
 
 
 
@@ -227,16 +273,23 @@ def update_movie(id: int, movie: Movie) -> dict:
 @app.delete("/movies/{id}", tags=["Movies"], response_model=List[Movie])
 def delete_movie(id: int) -> List[Movie]:
 
-    # Buscamos la película por el id
-    for movie in movies:
-        if movie['id'] == id:
-            movies.remove(movie)
+    db = Session()
 
-            # Devolvemos un mensaje de confirmación con las películas actualizadas
-            return JSONResponse(content={'message': 'Movie deleted', 'movies': movies}, status_code=200)
+    # Obtenemos la película por el id
+    result = db.query(MovieModel).filter(MovieModel.id == id).first()
+
+    # Si no se encuentra la película, devolvemos un mensaje
+    if not result:
+        return JSONResponse(content={'message': 'Movie not found'}, status_code=404)
+    
+    # Eliminamos la película
+    db.delete(result)
+
+    # Guardamos los cambios en la base de datos
+    db.commit()
     
     # Si no se encuentra la película, devolvemos un mensaje
-    return JSONResponse(content={'message': 'Movie not found'}, status_code=404)
+    return JSONResponse(content={'message': 'Delete success'}, status_code=200)
 
 
 

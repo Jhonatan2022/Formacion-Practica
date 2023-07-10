@@ -1,4 +1,4 @@
-Columnas
+Columns
 CodigoTercero
 NombreTercero
 Tercero (CodigoTercero + NombreTercero)
@@ -14,7 +14,8 @@ UnidadDeNegocio
 Estado
 
 
-tablas usadas
+
+Tables using
 GN_CentroDeCosto
 GN_Cliente
 GN_Persona
@@ -25,8 +26,8 @@ ST_Estado
 
 
 checklist   
-ip: 10.10.100.23
-instancia: sql2022
+adress: 10.10.100.23
+instance: sql2022
 database: DEV-SIF
 
 Soportecsu
