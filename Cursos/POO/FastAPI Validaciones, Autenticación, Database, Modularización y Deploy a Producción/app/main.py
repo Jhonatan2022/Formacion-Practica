@@ -2,14 +2,7 @@
 from fastapi import FastAPI
 
 # Importamos htmlResponse para poder devolver código HTML
-# Importamos jsonResponse para poder devolver código JSON
-from fastapi.responses import HTMLResponse, JSONResponse
-
-# Importamos BaseModel para poder usar validaciones
-from pydantic import BaseModel
-
-# Importamos el generate_token de jwt_manager.py
-from jwt_manager import create_token
+from fastapi.responses import HTMLResponse
 
 # Importamos las variables de configuración de la base de datos
 from config.database import engine, Base
@@ -18,7 +11,10 @@ from config.database import engine, Base
 from middlewares.error_handler import ErrorHandler
 
 # Importamos el router de movie para poder usarlo
-from routers.movie import movie_router
+from routers.movie_router import movie_router
+
+# Importamos el router de user para poder usarlo
+from routers.user_router import user_router
 #------------------------------IMPORT THIS-------------------------------------
 
 
@@ -41,18 +37,14 @@ app.add_middleware(ErrorHandler)
 # Agregamos el router de movie
 app.include_router(movie_router)
 
+# Agregamos el router de user
+app.include_router(user_router)
+
 
 
 # Creamos la base de datos y las tablas
 Base.metadata.create_all(bind=engine)
 
-
-
-
-# Creamos una clase de usuario que hereda de BaseModel para poder usar validaciones
-class User(BaseModel):
-    email:str
-    password:str
 
 
 
@@ -88,21 +80,6 @@ movies = [
 @app.get("/", tags=["Home"]) 
 def message():
     return HTMLResponse(content="<h1>Welcome to my API</h1>", status_code=200)
-
-
-
-# Creamos una ruta para que el usuario se pueda loguear y le devolvemos un token
-@app.post("/login", tags=["Auth"])
-def login(user: User):
-    
-    if user.email == "admin@gmail.com" and user.password == "admin":
-        token: str = create_token(user.dict())
-
-        return JSONResponse(status_code=200, content=token)
-
-
-
-
 
 
 
