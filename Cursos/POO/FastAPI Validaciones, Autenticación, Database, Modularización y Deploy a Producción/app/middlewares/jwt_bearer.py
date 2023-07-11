@@ -5,7 +5,7 @@ from fastapi.security import HTTPBearer
 from fastapi import Request, HTTPException
 
 # Importamos el generate_token de jwt_manager.py
-from jwt_manager import create_token, validate_token
+from utils.jwt_manager import create_token, validate_token
 
 
 # Creamos una clase que hereda httpbearer para poder usar el metodo post y recibir datos en el body
