@@ -1,3 +1,6 @@
+--Codigo de visual basic macro
+
+
 Public Function Prueba(X As Integer) As Integer
     suma = X + 38
 End Function
